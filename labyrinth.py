@@ -1,11 +1,13 @@
 import json
+import random
 
 class Labyrinth:
     def __init__(self, map):
         """initialyze labyrinth from file"""
-           
+        self.load(map)
+                   
     def load(self, mapFile):
-        """return a table which represent a map from a json file"""
+        """load a json file in Labyrinth object"""
         try:
             with open(mapFile,"r") as f:
                 self.map = json.load(open(mapFile))
@@ -14,7 +16,7 @@ class Labyrinth:
         except OSError as e:
             print("Problem with file :", e)
 
-    def printLabyrinth(self) :
+    def print(self) :
         """print labyrinth in terminal"""
         print()
         for line in self.map :
@@ -26,37 +28,32 @@ class Labyrinth:
     def getPassages(self):
         """return coordinates of labyrinth's free cells in a table"""
         freeCells = []
-        lineCount = 0
-        columnCount = 0
-        for line in self.map : #pour chaque ligne du labyrinthe chargé:
-            for cell in line :
-                if cell == "   ":
-                    freeCells.append([lineCount , columnCount])
-                columnCount += 1
-            columnCount = 0
-            lineCount += 1
-        print(freeCells)
-        print()
+        for i, line in enumerate(self.map) :
+            for j, cell in enumerate(line) :
+                if cell == "   " :
+                    freeCells.append([i,j])
+        return freeCells
 
-if __name__ == '__main__':
-    
-    print("enter a map file (ex : my_map.json) :")
-    mapFile = input()
-    
-    #initialize map argument for labyrinth object
-    map = [] 
+    def replaceCell(self, cellLine, cellColumn, content):
+        """replace cell's content with coordonates [line, column] by content argument"""
+        for i, line in enumerate(self.map):
+            if i == cellLine:
+                for j, column in enumerate(line):
+                    if j == cellColumn:
+                        line[j]=content
+                       
+    def placeItem(self, nbItem, avatar = "<->"):
+        """place items randomly in labyrinth"""
+        #répéter nb Item fois :
+        freeCells = self.getPassages()
+        itemCells = random.sample(freeCells, k=nbItem) #choisir parmis les cellules libres une cellule au hasard
+        for cell in itemCells:
+            itemLine = cell[0]
+            itemColumn = cell[1]
+            self.replaceCell(itemLine, itemColumn, avatar)
+             
+            
 
-    labyrinth = Labyrinth(map)
-
-    #load json file map in labyrinth's map argument
-    labyrinth.load(mapFile)
-
-    #print labyrinth in terminal
-    labyrinth.printLabyrinth()
-   
-    #recover free cells in map
-    labyrinth.getPassages()
-
-
+        
 
 
