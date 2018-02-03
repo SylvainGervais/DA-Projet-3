@@ -1,5 +1,6 @@
 import labyrinth
 import character
+import setup
 
 
 class Main:
@@ -23,9 +24,10 @@ if __name__ == '__main__':
 
     #print labyrinth in terminal
     labyrinth.print()
-   
 
-
+    mcG = character.Character(labyrinth)
+    print("Position de Mac Gyver : ", mcG.position)
+    print("Sac à dos : ", mcG.pickupItem, "/", setup.BAG_CAPACITY)
 
 
 

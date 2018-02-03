@@ -1,6 +1,8 @@
 import json
 import random
 
+import setup
+
 class Labyrinth:
     def __init__(self, map):
         """initialyze labyrinth from file"""
@@ -25,14 +27,14 @@ class Labyrinth:
             print()  
         print()
 
-    def getPassages(self):
-        """return coordinates of labyrinth's free cells in a table"""
-        freeCells = []
+    def getPositions(self, content):
+        """return coordinates list of labyrinth's cells corresponding content argument"""
+        positions = []
         for i, line in enumerate(self.map) :
             for j, cell in enumerate(line) :
-                if cell == "   " :
-                    freeCells.append([i,j])
-        return freeCells
+                if cell == content :
+                    positions.append([i,j])
+        return positions
 
     def replaceCell(self, cellLine, cellColumn, content):
         """replace cell's content with coordonates [line, column] by content argument"""
@@ -42,15 +44,14 @@ class Labyrinth:
                     if j == cellColumn:
                         line[j]=content
                        
-    def placeItem(self, nbItem, avatar = "<->"):
+    def placeItem(self, nbItem):
         """place items randomly in labyrinth"""
-        #répéter nb Item fois :
-        freeCells = self.getPassages()
-        itemCells = random.sample(freeCells, k=nbItem) #choisir parmis les cellules libres une cellule au hasard
+        freeCells = self.getPositions(setup.FREE_SPACE)
+        itemCells = random.sample(freeCells, k=nbItem) 
         for cell in itemCells:
             itemLine = cell[0]
             itemColumn = cell[1]
-            self.replaceCell(itemLine, itemColumn, avatar)
+            self.replaceCell(itemLine, itemColumn,setup.ITEM)
              
             
 
