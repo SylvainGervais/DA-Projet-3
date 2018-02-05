@@ -53,7 +53,15 @@ class Labyrinth:
             itemColumn = cell[1]
             self.replaceCell(itemLine, itemColumn,setup.ITEM)
              
-            
+    def cellContent(self, position):
+        """return cell's content in labyrinth position in argument"""
+        linePosition = position[0]
+        columnPosition = position[1]
+
+        for i, line in enumerate(self.map):
+            if i == linePosition :
+                content = line[columnPosition]
+        return content
 
         
 
