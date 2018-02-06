@@ -24,7 +24,7 @@ def printCommands():
     print("back :", MOVE_BACK)
     print("left :", MOVE_LEFT)
     print("right :", MOVE_RIGHT)
-    print("For pickup item hit space")
+    #print("For pickup item hit space")
     print("For quit the game hit", QUIT)
     print()
 

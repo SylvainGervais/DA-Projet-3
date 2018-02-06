@@ -34,6 +34,15 @@ class Character:
             originCellContent = labyrinth.cellContent(origin)
             destinationCellContent = labyrinth.cellContent(destination)
 
+            #pickup item
+            if destinationCellContent == setup.ITEM :
+                self.pickupItem += 1
+
+            #modify origin and destination  cell content
+            labyrinth.replaceCell(origin[0], origin[1], setup.FREE_SPACE)
+            labyrinth.replaceCell(destination[0], destination[1], setup.MAC_GYVER)
+
+            """ 
             #modify origin cell content in labyrinth
             if originCellContent == setup.ON_ITEM :
                 labyrinth.replaceCell(origin[0], origin[1], setup.ITEM)
@@ -41,7 +50,8 @@ class Character:
                 labyrinth.replaceCell(origin[0], origin[1], setup.GUARDIAN)
             else :
                 labyrinth.replaceCell(origin[0], origin[1], setup.FREE_SPACE)
-            
+
+
             #modify destinaion cell content in labyrinth
             if destinationCellContent == setup.ITEM:
                 labyrinth.replaceCell(destination[0], destination[1], setup.ON_ITEM)
@@ -49,12 +59,13 @@ class Character:
                 labyrinth.replaceCell(destination[0], destination[1], setup.WITH_GUARDIAN)
             else :
                 labyrinth.replaceCell(destination[0], destination[1], setup.MAC_GYVER)
+            """
 
             labyrinth.print()
         else :
             print("This move is not permitted, you must change your choice")
             print()
-                                               
+    '''                                              
     def pickup(self, labyrinth):
         """for pickup item in labyrinth"""
         cellContent = labyrinth.cellContent(self.position)
@@ -64,6 +75,6 @@ class Character:
             labyrinth.print()
         else :
             print("Nothing to pickup here !!!!!")
-        
-        
+    '''       
+    
 

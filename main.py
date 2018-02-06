@@ -38,8 +38,8 @@ if __name__ == '__main__':
     #print commands
     setup.printCommands()
 
-    while (mcG.position != guardianPosition or mcG.pickupItem != setup.NB_ITEM) :
-        print('What do you want ? move, pickup or quit game ?????')
+    while (mcG.position != guardianPosition) :
+        print('What do you want ? move or quit game ?????')
         print('Hit', setup.PRINT, 'for print commands')
         command = input()
 
@@ -50,20 +50,31 @@ if __name__ == '__main__':
         elif command == setup.PRINT :
             setup.printCommands()
 
+"""
         elif command == setup.PICKUP :
             mcG.pickup(myLabyrinth)
+"""
 
         elif command in (setup.MOVE_FRONT, setup.MOVE_BACK, setup.MOVE_LEFT, setup.MOVE_RIGHT) :
             mcG.move(myLabyrinth, command)
 
         else :
             print("I don't understand your choice !!!! try again ....")
-            setup.printCommands()           
-    print('==================================================================================================================')
-    print()
-    print('               You can exit the labyrinth, you win the game !!!!')
-    print()
-    print('==================================================================================================================')
+            setup.printCommands()
+
+    if mcG.pickupItem == setup.NB_ITEM :
+        print('==================================================================================================================')
+        print()
+        print('               The guardian is sleeping, you can exit the labyrinth ------->  you win !!!!')
+        print()
+        print('==================================================================================================================')
+    else :
+        print('==================================================================================================================')
+        print()
+        print("               The guardian stop you, he's too strong for you ----> You looooose !!!")
+        print()
+        print('==================================================================================================================')
+
 
 
 
