@@ -1,7 +1,7 @@
 import json
 import random
 
-import setup
+import config 
 
 class Labyrinth:
     def __init__(self, map):
@@ -46,12 +46,12 @@ class Labyrinth:
                        
     def placeItem(self, nbItem):
         """place items randomly in labyrinth"""
-        freeCells = self.getPositions(setup.FREE_SPACE)
+        freeCells = self.getPositions(config.FREE_SPACE)
         itemCells = random.sample(freeCells, k=nbItem) 
         for cell in itemCells:
             itemLine = cell[0]
             itemColumn = cell[1]
-            self.replaceCell(itemLine, itemColumn,setup.ITEM)
+            self.replaceCell(itemLine, itemColumn,config.ITEM)
              
     def cellContent(self, position):
         """return cell's content in labyrinth position in argument"""

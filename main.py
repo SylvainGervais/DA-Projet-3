@@ -1,6 +1,10 @@
+#! /usr/bin/env python3
+# coding: utf-8
+
+
 import labyrinth
 import character
-import setup
+import config
 
 
 class Main:
@@ -9,10 +13,8 @@ class Main:
 
     def run(self):
         pass
-    
 
-
-if __name__ == '__main__':
+def main() :
     print("enter a map file (ex : my_map.json) :")
     mapFile = "map.json" 
         
@@ -20,13 +22,13 @@ if __name__ == '__main__':
     myLabyrinth = labyrinth.Labyrinth(mapFile)
 
     #place items in map
-    myLabyrinth.placeItem(setup.NB_ITEM)
+    myLabyrinth.placeItem(config.NB_ITEM)
     
     #create Mac Gyver character
     mcG = character.Character(myLabyrinth)
 
     #get guardian position
-    guardianPosition = myLabyrinth.getPositions(setup.GUARDIAN)[0]
+    guardianPosition = myLabyrinth.getPositions(config.GUARDIAN)[0]
     
     #print labyrinth in terminal
     myLabyrinth.print()
@@ -36,33 +38,30 @@ if __name__ == '__main__':
     print()
 
     #print commands
-    setup.printCommands()
+    config.printCommands()
 
     while (mcG.position != guardianPosition) :
         print('What do you want ? move or quit game ?????')
-        print('Hit', setup.PRINT, 'for print commands')
+        print('Hit', config.PRINT, 'for print commands')
         command = input()
 
-        if command == setup.QUIT :
+        if command == config.QUIT :
             print("Loooooser !!!!!!!!!")
             exit()
 
-        elif command == setup.PRINT :
-            setup.printCommands()
+        elif command == config.PRINT :
+            config.printCommands()
 
-"""
-        elif command == setup.PICKUP :
-            mcG.pickup(myLabyrinth)
-"""
-
-        elif command in (setup.MOVE_FRONT, setup.MOVE_BACK, setup.MOVE_LEFT, setup.MOVE_RIGHT) :
-            mcG.move(myLabyrinth, command)
+       
+        elif command in (config.MOVE_FRONT, config.MOVE_BACK, config.MOVE_LEFT, config.MOVE_RIGHT) :
+            mcG.move(command)
+            myLabyrinth.print()
 
         else :
             print("I don't understand your choice !!!! try again ....")
-            setup.printCommands()
+            config.printCommands()
 
-    if mcG.pickupItem == setup.NB_ITEM :
+    if mcG.pickedUpItem == config.NB_ITEM :
         print('==================================================================================================================')
         print()
         print('               The guardian is sleeping, you can exit the labyrinth ------->  you win !!!!')
@@ -76,5 +75,7 @@ if __name__ == '__main__':
         print('==================================================================================================================')
 
 
+if __name__ == '__main__':
+    main()
 
 
