@@ -7,75 +7,81 @@ import character
 import config
 
 
-class Main:
+class Game:
     def __init__(self):
-         pass
+        print("enter a map file (ex : my_map.json) :")
+        mapFile = "map.json" 
+            
+        #create labyrinth 
+        self.labyrinth = labyrinth.Labyrinth(mapFile)
+
+        #place items in map
+        self.labyrinth.placeItem(config.NB_ITEM)
+        
+        #create Mac Gyver character
+        self.character = character.Character(self.labyrinth)
+
+        #print labyrinth in terminal
+        self.labyrinth.print()
+
+        #print rules
+        print('You are Mac Gyver "McG". You have to move in labyrinth, pickup all items "<->" and rejoin guardian "!G!"')
+        print()
+
+        #print commands
+        config.printCommands()
+
 
     def run(self):
-        pass
-
-def main() :
-    print("enter a map file (ex : my_map.json) :")
-    mapFile = "map.json" 
         
-    #create labyrinth 
-    myLabyrinth = labyrinth.Labyrinth(mapFile)
+        #get guardian position
+        guardianPosition = self.labyrinth.getPositions(config.GUARDIAN)[0]
 
-    #place items in map
-    myLabyrinth.placeItem(config.NB_ITEM)
-    
-    #create Mac Gyver character
-    mcG = character.Character(myLabyrinth)
+        while (self.character.position != guardianPosition) :
+            print('What do you want ? move or quit game ?????')
+            print('Hit', config.PRINT, 'for print commands')
+            command = input()
 
-    #get guardian position
-    guardianPosition = myLabyrinth.getPositions(config.GUARDIAN)[0]
-    
-    #print labyrinth in terminal
-    myLabyrinth.print()
+            if command == config.QUIT :
+                print("Loooooser !!!!!!!!!")
+                exit()
 
-    #print rules
-    print('You are Mac Gyver "McG". You have to move in labyrinth, pickup all items "<->" and rejoin guardian "!G!"')
-    print()
+            elif command == config.PRINT :
+                config.printCommands()
 
-    #print commands
-    config.printCommands()
+           
+            elif command in (config.MOVE_FRONT, config.MOVE_BACK, config.MOVE_LEFT, config.MOVE_RIGHT) :
+                if(self.character.move(command)): #if move is OK
+                    self.labyrinth.print()
+                    print("Picked up items ", self.character.pickedUpItem,"/", config.NB_ITEM)
+                    print()
 
-    while (mcG.position != guardianPosition) :
-        print('What do you want ? move or quit game ?????')
-        print('Hit', config.PRINT, 'for print commands')
-        command = input()
+                else:
+                    print()
+                    print("You can't go here ! Choose another direction !!!")
+                    print("==================================================================================")
+                    print()
 
-        if command == config.QUIT :
-            print("Loooooser !!!!!!!!!")
-            exit()
+            else :
+                print("I don't understand your choice !!!! try again ....")
+                config.printCommands()
 
-        elif command == config.PRINT :
-            config.printCommands()
-
-       
-        elif command in (config.MOVE_FRONT, config.MOVE_BACK, config.MOVE_LEFT, config.MOVE_RIGHT) :
-            mcG.move(command)
-            myLabyrinth.print()
-
+        if self.character.pickedUpItem == config.NB_ITEM :
+            print('==================================================================================================================')
+            print()
+            print('               The guardian is sleeping, you can exit the labyrinth ------->  you win !!!!')
+            print()
+            print('==================================================================================================================')
         else :
-            print("I don't understand your choice !!!! try again ....")
-            config.printCommands()
+            print('==================================================================================================================')
+            print()
+            print("               The guardian stop you, he's too strong for you ----> You looooose !!!")
+            print()
+            print('==================================================================================================================')
 
-    if mcG.pickedUpItem == config.NB_ITEM :
-        print('==================================================================================================================')
-        print()
-        print('               The guardian is sleeping, you can exit the labyrinth ------->  you win !!!!')
-        print()
-        print('==================================================================================================================')
-    else :
-        print('==================================================================================================================')
-        print()
-        print("               The guardian stop you, he's too strong for you ----> You looooose !!!")
-        print()
-        print('==================================================================================================================')
-
-
+    
 if __name__ == '__main__':
-    main()
+    play = Game()
+    play.run()
 
-
+    
