@@ -15,15 +15,15 @@ class Game:
             #create labyrinth 
         self.labyrinth = labyrinth.Labyrinth(mapFile)
             #place items in map
-        self.labyrinth.placeItem(config.NB_ITEM)
+        self.labyrinth.item_cells = self.labyrinth.place_item(config.NB_ITEM)
             #create Mac Gyver character
         self.character = character.Character(self.labyrinth)
             
     def run(self, args):
         if args.graphic_mode :
-            guiPlay = gui.Gui(play)
-            guiPlay.print()
-            guiPlay.run()
+            gui_play = gui.Gui(play)
+            gui_play.print()
+            gui_play.run()
         else :
             #print labyrinth in terminal
             self.labyrinth.print()
@@ -31,11 +31,11 @@ class Game:
             print('You are Mac Gyver "McG". You have to move in labyrinth, pickup all items "<->" and rejoin guardian "!G!"')
             print()
             #print commands
-            config.printCommands()
+            config.print_commands()
 
             #get guardian position
-            guardianPosition = self.labyrinth.getPositions(config.GUARDIAN)[0]
-            while (self.character.position != guardianPosition) :
+            guardian_position = self.labyrinth.get_positions(config.GUARDIAN)[0]
+            while (self.character.position != guardian_position) :
                 print('What do you want ? move or quit game ?????')
                 print('Hit', config.PRINT, 'for print commands')
                 command = input()
@@ -43,11 +43,11 @@ class Game:
                     print("Loooooser !!!!!!!!!")
                     exit()
                 elif command == config.PRINT :
-                    config.printCommands()
+                    config.print_commands()
                 elif command in (config.MOVE_FRONT, config.MOVE_BACK, config.MOVE_LEFT, config.MOVE_RIGHT) :
                     if(self.character.move(command)): #if move is OK
                         self.labyrinth.print()
-                        print("Picked up items ", self.character.pickedUpItem,"/", config.NB_ITEM)
+                        print("Picked up items ", self.character.picked_up_item,"/", config.NB_ITEM)
                         print()
                     else:
                         print()
@@ -56,8 +56,8 @@ class Game:
                         print()
                 else :
                     print("I don't understand your choice !!!! try again ....")
-                    config.printCommands()
-            if self.character.pickedUpItem == config.NB_ITEM :
+                    config.print_commands()
+            if self.character.picked_up_item == config.NB_ITEM :
                 print('===============================================================================================================')
                 print()
                 print('               The guardian is sleeping, you can exit the labyrinth ------->  you win !!!!')

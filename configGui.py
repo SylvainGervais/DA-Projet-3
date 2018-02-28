@@ -9,6 +9,8 @@ IMG_MURDOC = "./ressources/guardian.png"
 IMG_ETHER = "./ressources/ether.png"
 IMG_NEEDLE = "./ressources/needle.png"
 IMG_TUBE = "./ressources/tube.png"
+IMG_BAG_NOT_FULL = "./ressources/bagIsNotFull.png"
+IMG_BAG_FULL = "./ressources/bagIsFull.png"
 
 #coordinates of labyrinth print in screen
 LAB_X_ORIGIN = 60

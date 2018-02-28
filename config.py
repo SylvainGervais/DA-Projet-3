@@ -15,7 +15,7 @@ QUIT = "x"
 PRINT = "c"
 
 
-def printCommands():
+def print_commands():
     print("Commands for move Mac Gyver :")
     print("front :", MOVE_FRONT)
     print("back :", MOVE_BACK)

@@ -27,7 +27,7 @@ class Labyrinth:
             print()  
         print()
 
-    def getPositions(self, content):
+    def get_positions(self, content):
         """return coordinates list of labyrinth's cells corresponding content argument"""
         positions = []
         for i, line in enumerate(self.map) :
@@ -36,31 +36,32 @@ class Labyrinth:
                     positions.append([i,j])
         return positions
 
-    def replaceCell(self, cellLine, cellColumn, content):
+    def replace_cell(self, cell_line, cell_column, content):
         """replace cell's content with coordonates [line, column] by content argument"""
         for i, line in enumerate(self.map):
-            if i == cellLine:
+            if i == cell_line:
                 for j, column in enumerate(line):
-                    if j == cellColumn:
+                    if j == cell_column:
                         line[j]=content
                        
-    def placeItem(self, nbItem):
-        """place items randomly in labyrinth"""
-        freeCells = self.getPositions(config.FREE_SPACE)
-        itemCells = random.sample(freeCells, k=nbItem) 
-        for cell in itemCells:
-            itemLine = cell[0]
-            itemColumn = cell[1]
-            self.replaceCell(itemLine, itemColumn,config.ITEM)
+    def place_item(self, nb_item):
+        """place items randomly in labyrinth and return the items positions list"""
+        free_cells = self.get_positions(config.FREE_SPACE)
+        item_cells = random.sample(free_cells, k=nb_item) 
+        for cell in item_cells:
+            item_line = cell[0]
+            item_column = cell[1]
+            self.replace_cell(item_line, item_column,config.ITEM)
+        return item_cells
              
-    def cellContent(self, position):
+    def cell_content(self, position):
         """return cell's content in labyrinth position in argument"""
-        linePosition = position[0]
-        columnPosition = position[1]
+        line_position = position[0]
+        column_position = position[1]
 
         for i, line in enumerate(self.map):
-            if i == linePosition :
-                content = line[columnPosition]
+            if i == line_position :
+                content = line[column_position]
         return content
 
         

@@ -3,17 +3,16 @@ import config
 
 class Character:
     def __init__(self, labyrinth):
-        self.pickedUpItem = 0
+        self.picked_up_item = 0
         self.labyrinth = labyrinth
-        self.position = self.labyrinth.getPositions(config.MAC_GYVER)[0]
-
+        self.position = self.labyrinth.get_positions(config.MAC_GYVER)[0]
                        
     def move(self, direction):
         """for move a character in the labyrinth, it can move front, back, left, right. return list with origin position and destination position if move is done else return none"""
         origin = self.position[:]
-        free_cells = self.labyrinth.getPositions(config.FREE_SPACE)
-        item_cells = self.labyrinth.getPositions(config.ITEM)
-        guardian_cell = self.labyrinth.getPositions(config.GUARDIAN)
+        free_cells = self.labyrinth.get_positions(config.FREE_SPACE)
+        item_cells = self.labyrinth.get_positions(config.ITEM)
+        guardian_cell = self.labyrinth.get_positions(config.GUARDIAN)
         #initialyse destination for not modify self.position if move is prohibited
         destination = self.position[:]
         #destination calculation
@@ -29,12 +28,12 @@ class Character:
             #new character position
             self.position = destination
             #picked up item
-            destinationCellContent = self.labyrinth.cellContent(destination)
-            if destinationCellContent == config.ITEM :
-                self.pickedUpItem += 1
+            destination_cell_content = self.labyrinth.cell_content(destination)
+            if destination_cell_content == config.ITEM :
+                self.picked_up_item += 1
             #modify origin and destination  cell content
-            self.labyrinth.replaceCell(origin[0], origin[1], config.FREE_SPACE)
-            self.labyrinth.replaceCell(destination[0], destination[1], config.MAC_GYVER)
+            self.labyrinth.replace_cell(origin[0], origin[1], config.FREE_SPACE)
+            self.labyrinth.replace_cell(destination[0], destination[1], config.MAC_GYVER)
             return [origin, destination] 
 
                
