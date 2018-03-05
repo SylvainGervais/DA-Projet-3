@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import argparse
+
 import labyrinth
 import character
 import config
@@ -20,11 +21,11 @@ class Game:
         self.character = character.Character(self.labyrinth)
             
     def run(self, args):
-        if args.graphic_mode :
+        if args.graphic_mode:
             gui_play = gui.Gui(play)
             gui_play.print()
             gui_play.run()
-        else :
+        else:
             #print labyrinth in terminal
             self.labyrinth.print()
             #print rules
@@ -35,16 +36,16 @@ class Game:
 
             #get guardian position
             guardian_position = self.labyrinth.get_positions(config.GUARDIAN)[0]
-            while (self.character.position != guardian_position) :
+            while (self.character.position != guardian_position):
                 print('What do you want ? move or quit game ?????')
                 print('Hit', config.PRINT, 'for print commands')
                 command = input()
-                if command == config.QUIT :
+                if command == config.QUIT:
                     print("Loooooser !!!!!!!!!")
                     exit()
-                elif command == config.PRINT :
+                elif command == config.PRINT:
                     config.print_commands()
-                elif command in (config.MOVE_FRONT, config.MOVE_BACK, config.MOVE_LEFT, config.MOVE_RIGHT) :
+                elif command in (config.MOVE_FRONT, config.MOVE_BACK, config.MOVE_LEFT, config.MOVE_RIGHT):
                     if(self.character.move(command)): #if move is OK
                         self.labyrinth.print()
                         print("Picked up items ", self.character.picked_up_item,"/", config.NB_ITEM)
@@ -54,16 +55,16 @@ class Game:
                         print("You can't go here ! Choose another direction !!!")
                         print("==================================================================================")
                         print()
-                else :
+                else:
                     print("I don't understand your choice !!!! try again ....")
                     config.print_commands()
-            if self.character.picked_up_item == config.NB_ITEM :
+            if self.character.picked_up_item == config.NB_ITEM:
                 print('===============================================================================================================')
                 print()
                 print('               The guardian is sleeping, you can exit the labyrinth ------->  you win !!!!')
                 print()
                 print('===============================================================================================================')
-            else :
+            else:
                 print('===============================================================================================================')
                 print()
                 print("               The guardian stop you, he's too strong for you ----> You looooose !!!")

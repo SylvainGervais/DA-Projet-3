@@ -105,7 +105,7 @@ class Gui:
                 for event in pygame.event.get():
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
-                            playing = False
+                            moving, playing = False
                         elif event.key == pygame.K_UP:
                             self.move(config.MOVE_FRONT)
                         elif event.key == pygame.K_DOWN:
@@ -118,7 +118,7 @@ class Gui:
                         if self.game.character.position == guardian_position:
                             moving = False
                     elif event.type == pygame.QUIT:
-                        playing = False
+                        moving, playing = False
                     pygame.display.flip()
             if self.game.character.picked_up_item == config.NB_ITEM:
                 self.screen.blit(self.img_win, (0, 0))
