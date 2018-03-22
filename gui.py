@@ -95,6 +95,7 @@ class Gui:
             self.screen.blit(self.img_bag_full, (x_blit_bag, y_blit_bag))
 
     def run(self):
+        """game loop in graphic mode"""
         playing = True
         moving = True
         guardian_position = self.game.labyrinth.get_positions(config.GUARDIAN)[0]
@@ -105,7 +106,8 @@ class Gui:
                 for event in pygame.event.get():
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
-                            moving, playing = False
+                            moving = False
+                            playing = False
                         elif event.key == pygame.K_UP:
                             self.move(config.MOVE_FRONT)
                         elif event.key == pygame.K_DOWN:
@@ -118,7 +120,8 @@ class Gui:
                         if self.game.character.position == guardian_position:
                             moving = False
                     elif event.type == pygame.QUIT:
-                        moving, playing = False
+                        moving = False
+                        playing = False
                     pygame.display.flip()
             if self.game.character.picked_up_item == config.NB_ITEM:
                 self.screen.blit(self.img_win, (0, 0))
@@ -131,4 +134,3 @@ class Gui:
             pygame.time.delay(5000)
             playing = False
         pygame.quit()
-
