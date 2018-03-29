@@ -1,4 +1,4 @@
-#legend
+# legend
 WALL = "|M|"
 ITEM = "<->"
 FREE_SPACE = "   "
@@ -6,7 +6,7 @@ MAC_GYVER = "McG"
 GUARDIAN = "!G!"
 NB_ITEM = 3
 
-#commands
+# commands
 MOVE_FRONT = "z"
 MOVE_BACK = "s"
 MOVE_LEFT = "q"
@@ -23,4 +23,3 @@ def print_commands():
     print("right :", MOVE_RIGHT)
     print("For quit the game hit", QUIT)
     print()
-

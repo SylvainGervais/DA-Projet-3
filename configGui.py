@@ -14,6 +14,6 @@ IMG_BAG_FULL = "./ressources/bagIsFull.png"
 IMG_WIN = "./ressources/img_win.jpg"
 IMG_LOOSE = "./ressources/img_loose.png"
 
-#coordinates of labyrinth print in screen
-LAB_X_ORIGIN = 272 
-LAB_Y_ORIGIN = 78 
+# coordinates of labyrinth print in screen
+LAB_X_ORIGIN = 272
+LAB_Y_ORIGIN = 78

@@ -45,3 +45,4 @@ class Character:
             self.labyrinth.replace_cell(destination[0], destination[1],
                                         config.MAC_GYVER)
             return [origin, destination]
+        return [None, None]
