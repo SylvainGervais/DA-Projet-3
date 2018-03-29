@@ -40,11 +40,6 @@ class Gui:
         self.img_win = pg.image.load(gui.IMG_WIN).convert_alpha()
         self.img_loose = pg.image.load(gui.IMG_LOOSE).convert_alpha()
         self.picked_up_item()
-        
-        # fonts
-        default_font = pg.font.get_default_font()
-        font = pg.font.SysFont(default_font, 80)
-
 
     def position_items(self):
         """position specific items ether, needle and tube in labyrinth"""
@@ -160,6 +155,11 @@ class Gui:
                         moving = False
                         playing = False
                     pg.display.flip()
+
+            # game over messages
+            default_font = pg.font.get_default_font()
+            font = pg.font.SysFont(default_font, 80)
+
             if self.game.character.picked_up_item == config.NB_ITEM:
                 self.screen.blit(self.img_win, (0, 0))
                 game_over_text = font.render(
